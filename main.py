@@ -44,7 +44,7 @@ def main():
     users_followers = bot.get_user_followers(id_user_start_post)
 
 
-    if len(users_like) <= 0:
+    if len(users_followers) <= 0:
         print("Список подписчиков Пустой  =  Все остановили ")
         return
 
