@@ -1,0 +1,5 @@
+instabot==0.76.0
+pprint==0.1.0
+python-dotenv==0.10.3
+argparse==1.4.0
+
