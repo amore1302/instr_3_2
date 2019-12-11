@@ -11,13 +11,13 @@ def is_user_exist(current_user):
     return (bot.get_user_id_from_username(current_user) != None )
 
 
-def get_all_users_from_one_coment(current_comment):
+def get_all_users_from_one_comment(current_comment):
 	# как искать регулярное выражение для инстаграмм описано в ссылке
 	#     https://blog.jstassen.com/2016/03/code-regex-for-instagram-username-and-hashtags/
     reg_expr_for_user_instagram = "(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
     resultat_list = []
-    users_current_coment = re.findall(reg_expr_for_user_instagram, current_comment)
-    for current_user in users_current_coment:
+    users_current_comment = re.findall(reg_expr_for_user_instagram, current_comment)
+    for current_user in users_current_comment:
         if is_user_exist(current_user):
             if not (current_user in resultat_list):
                 resultat_list.append(current_user)
@@ -32,7 +32,6 @@ def main():
     parser.add_argument("echo")
     args = parser.parse_args()
     url_post_istagram = args.echo
-
 
     instagram_login = os.getenv("INTGR_LOGIN")
     instagram_passwd = os.getenv("INTGR_PASSWD")
@@ -51,10 +50,10 @@ def main():
         return
 
     count_user_and_usercomment = 0
-    all_coments = bot.get_media_comments_all(media_id, True)
-    set_who_commented = set()
-    for current_coment in all_coments:
-        current_user_and_usercomment = get_all_users_from_one_coment(current_coment)
+    all_comments = bot.get_media_comments_all(media_id, True)
+    candidates_prize = set()
+    for current_comment in all_comments:
+        current_user_and_usercomment = get_all_users_from_one_comment(current_comment)
         if len(current_user_and_usercomment) < 2:
             continue
         current_user = current_user_and_usercomment[0]
@@ -68,14 +67,14 @@ def main():
 
         if id_curent_user_str in users_followers:
             if id_curent_user_str in users_like:
-                set_who_commented.add(current_user)
+                candidates_prize.add(current_user)
 
-    if len(set_who_commented) <= 0:
+    if not candidates_prize :
         print("Список пользователей по всем условиям Пустой !!!")
         return
 
     print("Список Пользователей кто выполнил все условия конкурса Instagram")
-    pprint(set_who_commented)
+    pprint(candidates_prize)
 
 
 if __name__ == '__main__':
