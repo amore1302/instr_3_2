@@ -15,13 +15,11 @@ def get_all_users_from_one_comment(current_comment):
 	# как искать регулярное выражение для инстаграмм описано в ссылке
 	#     https://blog.jstassen.com/2016/03/code-regex-for-instagram-username-and-hashtags/
     reg_expr_for_user_instagram = "(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
-    from_one_comment_users = set()
-    mentions = re.findall(reg_expr_for_user_instagram, current_comment)
-    for mention in mentions:
-        if is_user_exist(mention):
-            from_one_comment_users.add(mention)
-    return from_one_comment_users
 
+	mentions = re.findall(reg_expr_for_user_instagram, current_comment)
+	filtered_mentions = {mention for mention in mentions if is_user_exist(user)}
+    return filtered_mentions
+	
 
 def main():
     load_dotenv()
