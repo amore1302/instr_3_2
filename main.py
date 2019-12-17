@@ -16,10 +16,10 @@ def get_all_users_from_one_comment(current_comment):
 	#     https://blog.jstassen.com/2016/03/code-regex-for-instagram-username-and-hashtags/
     reg_expr_for_user_instagram = "(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
     from_one_comment_users = set()
-    current_comment_users = re.findall(reg_expr_for_user_instagram, current_comment)
-    for current_user in current_comment_users:
-        if is_user_exist(current_user):
-            from_one_comment_users.add(current_user)
+    mentions = re.findall(reg_expr_for_user_instagram, current_comment)
+    for mention in mentions:
+        if is_user_exist(mention):
+            from_one_comment_users.add(mention)
     return from_one_comment_users
 
 
@@ -40,8 +40,8 @@ def main():
 
     like_users = bot.get_media_likers(media_id)
 
-    id_user_start_post = bot.get_user_id_from_username("alinavelnikovskaya")
-    followers_users = bot.get_user_followers(id_user_start_post)
+    start_post_user_id = bot.get_user_id_from_username("alinavelnikovskaya")
+    followers_users = bot.get_user_followers(start_post_user_id)
 
 
     if not followers_users :
@@ -58,12 +58,12 @@ def main():
         current_user = current_user_and_usercomment[0]
         who_invited_a_friend_count = who_invited_a_friend_count + 1
         print("{1} {0}".format(current_user_str, who_invited_a_friend_count))
-        id_curent_user_int = bot.get_user_id_from_username(current_user)
-        if id_curent_user_int is None:
+        id_current_user_int = bot.get_user_id_from_username(current_user)
+        if id_current_user_int is None:
             continue
-        id_curent_user_str = str(id_curent_user_int)
+        id_curtent_user_str = str(id_current_user_int)
 
-        if id_curent_user_str in followers_users and  id_curent_user_str in like_users :
+        if id_curtent_user_str in followers_users and  id_curtent_user_str in like_users :
             prize_candidates.add(current_user)
 
     if not prize_candidates :
