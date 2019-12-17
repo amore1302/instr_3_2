@@ -16,8 +16,8 @@ def get_all_users_from_one_comment(current_comment):
 	#     https://blog.jstassen.com/2016/03/code-regex-for-instagram-username-and-hashtags/
     reg_expr_for_user_instagram = "(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
     resultat_list = set()
-    users_current_comment = re.findall(reg_expr_for_user_instagram, current_comment)
-    for current_user in users_current_comment:
+    current_comment_users = re.findall(reg_expr_for_user_instagram, current_comment)
+    for current_user in current_comment_users:
         if is_user_exist(current_user):
             resultat_list.add(current_user)
     return resultat_list
