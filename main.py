@@ -30,8 +30,8 @@ def main():
     args = parser.parse_args()
     url_post_istagram = args.echo
 
-    instagram_login = os.getenv("INTGRAM_LOGIN")
-    instagram_passwd = os.getenv("INTGRAM_PASSWD")
+    instagram_login = os.getenv("INSTAGRAM_LOGIN")
+    instagram_passwd = os.getenv("INSTAGRAM_PASSWD")
     bot.login(username=instagram_login, password=instagram_passwd)
 
     media_id = bot.get_media_id_from_link(url_post_istagram)
