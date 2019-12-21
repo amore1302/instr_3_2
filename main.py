@@ -51,8 +51,6 @@ def main():
     prize_candidates = set()
     for current_comment in all_comments:
         current_user_and_usercomment = get_all_users_from_one_comment(current_comment)
-        if len(current_user_and_usercomment) < 2:
-            continue
         for current_user in current_user_and_usercomment[1:] :
             if is_user_exist(current_user) :
                 comment_users.add(current_user)
