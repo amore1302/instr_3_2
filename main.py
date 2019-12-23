@@ -26,8 +26,10 @@ def main():
     bot = Bot()
 
     parser = argparse.ArgumentParser()
+    parser.add_argument("name")
     parser.add_argument("echo")
     args = parser.parse_args()
+    url_name_user = args.name
     url_post_istagram = args.echo
 
     instagram_login = os.getenv("INSTAGRAM_LOGIN")
@@ -38,7 +40,9 @@ def main():
 
     like_users = bot.get_media_likers(media_id)
 
-    start_post_user_id = bot.get_user_id_from_username("alinavelnikovskaya")
+    #start_post_user_id = bot.get_user_id_from_username("alinavelnikovskaya")
+    start_post_user_id = bot.get_user_id_from_username(url_name_user) 
+
     followers_users = bot.get_user_followers(start_post_user_id)
 
 
