@@ -38,9 +38,8 @@ def main():
 
     media_id = bot.get_media_id_from_link(url_post_istagram)
 
-    like_users = bot.get_media_likers(media_id)
+    liked_users = bot.get_media_likers(media_id)
 
-    #start_post_user_id = bot.get_user_id_from_username("alinavelnikovskaya")
     start_post_user_id = bot.get_user_id_from_username(url_name_user) 
 
     followers_users = bot.get_user_followers(start_post_user_id)
@@ -64,7 +63,7 @@ def main():
         id_current_user_int = bot.get_user_id_from_username(current_user)
         id_curtent_user_str = str(id_current_user_int)
 
-        if id_curtent_user_str in followers_users and  id_curtent_user_str in like_users :
+        if id_curtent_user_str in followers_users and  id_curtent_user_str in liked_users :
             prize_candidates.add(current_user)
 
     if not prize_candidates :
