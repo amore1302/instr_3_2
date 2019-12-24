@@ -17,7 +17,7 @@ def get_all_users_from_one_comment(current_comment):
     reg_expr_for_user_instagram = "(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
 
     mentions = re.findall(reg_expr_for_user_instagram, current_comment)
-    filtered_mentions = {mention for mention in mentions if is_user_exist(user)}
+    filtered_mentions = {mention for mention in mentions if is_user_exist(mention)}
     return filtered_mentions
 	
 
