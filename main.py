@@ -42,12 +42,12 @@ def main():
     id_user_start_post = bot.get_user_id_from_username(url_name_user)
     followers_users = bot.get_user_followers(id_user_start_post)
 
-	if liked_users:
-		print("Не нашли список лайков поста")
-		return
-	if start_post_user_id:
-		print("Не нашли кто подписался на автора поста")
-		return
+    if liked_users:
+        print("Не нашли список лайков поста")
+        return
+    if start_post_user_id:
+        print("Не нашли кто подписался на автора поста")
+        return
 
     for comment_full in bot.get_media_comments_all(media_id, False):
         comment_author = comment_full["user"]["username"]
