@@ -37,7 +37,7 @@ def main():
     bot.login(username=inst_login, password=inst_passwd)
 
     media_id = bot.get_media_id_from_link(url_post_istagram)
-    users_like = bot.get_media_likers(media_id)
+    liked_users = bot.get_media_likers(media_id)
 
     id_user_start_post = bot.get_user_id_from_username(url_name_user)
     followers_users = bot.get_user_followers(id_user_start_post)
