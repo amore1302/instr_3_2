@@ -25,6 +25,7 @@ def get_all_users_from_one_coment(current_comment):
 
 
 def main():
+   load_dotenv()
     parser = argparse.ArgumentParser()
     parser.add_argument("name")
     parser.add_argument("echo")
@@ -32,9 +33,9 @@ def main():
     url_name_user = args.name
     url_post_istagram = args.echo
 
-    inst_login = os.getenv("INTGR_LOGIN")
-    inst_passwd = os.getenv("INTGR_PASSWD")
-    bot.login(username=inst_login, password=inst_passwd)
+    instagram_login = os.getenv("INSTAGRAM_LOGIN")
+    instagram_passwd = os.getenv("INSTAGRAM_PASSWD")
+    bot.login(username=instagram_login, password=instagram_passwd)
 
     media_id = bot.get_media_id_from_link(url_post_istagram)
     liked_users = bot.get_media_likers(media_id)
@@ -75,8 +76,4 @@ def main():
     print(comment_users)
 
 if __name__ == '__main__':
-    load_dotenv()
-    inst_login = os.getenv("INTGR_LOGIN")
-    inst_passwd = os.getenv("INTGR_PASSWD")
-    bot = Bot()
     main()
