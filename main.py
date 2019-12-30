@@ -71,8 +71,8 @@ def main():
                     break
 
 
-	print("Кандидаты на приз :")
-	print(comment_users)
+    print("Кандидаты на приз :")
+    print(comment_users)
 
 if __name__ == '__main__':
     load_dotenv()
