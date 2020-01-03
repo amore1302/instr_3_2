@@ -23,7 +23,7 @@ def get_all_users_from_one_coment(current_comment):
 
 
 def main():
-   load_dotenv()
+    load_dotenv()
     parser = argparse.ArgumentParser()
     parser.add_argument("name")
     parser.add_argument("echo")
