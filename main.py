@@ -44,6 +44,8 @@ def main():
         print("Не нашли кто подписался на автора поста")
         return
 
+    prize_candidates = set()
+	bad_users = set()
     for comment_full in bot.get_media_comments_all(media_id, False):
         comment_author = comment_full["user"]["username"]
         if comment_author in prize_candidates or comment_author in bad_users:
@@ -65,7 +67,7 @@ def main():
 
 
     print("Кандидаты на приз :")
-    print(comment_users)
+    print(prize_candidates)
 
 if __name__ == '__main__':
     main()
