@@ -16,9 +16,8 @@ def get_all_users_from_one_coment(current_comment):
     resultat_list = []
     users_current_coment = re.findall(reg_expr_for_user_instagram, current_comment)
     for current_user in users_current_coment:
-        if is_user_exist(current_user):
-            if not (current_user in resultat_list):
-                resultat_list.append(current_user)
+        if is_user_exist(current_user) and ( not (current_user in resultat_list) ):
+            resultat_list.append(current_user)
     return resultat_list
 
 
