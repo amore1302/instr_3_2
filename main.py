@@ -45,7 +45,7 @@ def main():
         return
 
     prize_candidates = set()
-	bad_users = set()
+    bad_users = set()
     for comment_full in bot.get_media_comments_all(media_id, False):
         comment_author = comment_full["user"]["username"]
         if comment_author in prize_candidates or comment_author in bad_users:
@@ -64,7 +64,6 @@ def main():
                     else:
                         bad_users.add(comment_author)
                     break
-
 
     print("Кандидаты на приз :")
     print(prize_candidates)
