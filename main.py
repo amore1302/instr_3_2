@@ -8,9 +8,7 @@ import os
 
 
 def is_user_exist(current_user):
-    if bot.get_user_id_from_username(current_user) != None:
-        return True
-    return False
+    return bot.get_user_id_from_username(current_user) != None
 
 
 def get_all_users_from_one_coment(current_comment):
