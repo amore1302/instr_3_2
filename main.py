@@ -11,11 +11,15 @@ def is_user_exist(current_user):
     return bot.get_user_id_from_username(current_user) != None
 
 
-def get_all_users_from_one_coment(current_comment):
+
+def get_mentions(current_comment):
+    # как искать регулярное выражение для инстаграмм описано в ссылке
+    #     https://blog.jstassen.com/2016/03/code-regex-for-instagram-username-and-hashtags/
     reg_expr_for_user_instagram = r"(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
-    users_current_coment = re.findall(reg_expr_for_user_instagram, current_comment)
-    resultat_list = [current_user for current_user in users_current_coment if is_user_exist(current_user) and ( not (current_user in resultat_list) )]
-    return resultat_list
+
+    mentions = re.findall(reg_expr_for_user_instagram, current_comment)
+    filtered_mentions = [mention for mention in mentions if is_user_exist(mention)]
+    return filtered_mentions
 
 
 def main():
@@ -37,6 +41,8 @@ def main():
     id_user_start_post = bot.get_user_id_from_username(url_name_user)
     followers_users = bot.get_user_followers(id_user_start_post)
 
+    # Два условия пустой список если инстаграмм бот возращает пустой список
+    # то это означает что на все запросы далее бот возвращает только пустые ответы
     if liked_users:
         print("Не нашли список лайков поста")
         return
@@ -52,10 +58,10 @@ def main():
             continue
         comment = comment_full["text"]
 
-        current_user_and_usercomment = get_mentions(comment)
-        if current_user_and_usercomment:
+        mentions_users = get_mentions(comment)
+        if mentions_users:
             fritnds = bot.get_user_following(comment_author)
-            for current_user in current_user_and_usercomment:
+            for current_user in mentions_users:
                 current_user_id_str = str(bot.get_user_id_from_username(current_user))
                 if current_user_id_str in fritnds:
                     comment_author_id_str = str(comment_full["user_id"])
