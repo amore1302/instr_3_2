@@ -49,14 +49,12 @@ def main():
 
     for comment_full in bot.get_media_comments_all(media_id, False):
         comment_author = comment_full["user"]["username"]
-        print(comment_full)
         if comment_author in prize_candidates or comment_author in bad_users:
             continue
         comment = comment_full["text"]
 
         current_user_and_usercomment = get_mentions(comment)
         if current_user_and_usercomment:
-            print(comment_author)
             fritnds = bot.get_user_following(comment_author)
             for current_user in current_user_and_usercomment:
                 current_user_id_str = str(bot.get_user_id_from_username(current_user))
