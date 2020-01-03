@@ -13,11 +13,8 @@ def is_user_exist(current_user):
 
 def get_all_users_from_one_coment(current_comment):
     reg_expr_for_user_instagram = r"(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
-    resultat_list = []
     users_current_coment = re.findall(reg_expr_for_user_instagram, current_comment)
-    for current_user in users_current_coment:
-        if is_user_exist(current_user) and ( not (current_user in resultat_list) ):
-            resultat_list.append(current_user)
+    resultat_list = [current_user for current_user in users_current_coment if is_user_exist(current_user) and ( not (current_user in resultat_list) )]
     return resultat_list
 
 
