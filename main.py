@@ -8,7 +8,7 @@ import os
 
 
 def is_user_exist(current_user):
-    return bot.get_user_id_from_username(current_user) != None
+    return bot.get_user_id_from_username(current_user)
 
 
 
@@ -59,17 +59,19 @@ def main():
         comment = comment_full["text"]
 
         mentions_users = get_mentions(comment)
-        if mentions_users:
-            fritnds = bot.get_user_following(comment_author)
-            for current_user in mentions_users:
-                current_user_id_str = str(bot.get_user_id_from_username(current_user))
-                if current_user_id_str in fritnds:
-                    comment_author_id_str = str(comment_full["user_id"])
-                    if comment_author_id_str in liked_users and comment_author_id_str in followers_users:
-                        prize_candidates.add(comment_author)
-                    else:
-                        bad_users.add(comment_author)
-                    break
+        fritnds = bot.get_user_following(comment_author)
+		found_good_friend = False
+        for current_user in mentions_users:
+            current_user_id_str = str(bot.get_user_id_from_username(current_user))
+            if current_user_id_str in fritnds:
+				found_good_friend = True
+                break
+		if found_good_friend:
+            comment_author_id_str = str(comment_full["user_id"])
+            if comment_author_id_str in liked_users and comment_author_id_str in followers_users:
+                prize_candidates.add(comment_author)
+            else:
+                bad_users.add(comment_author)
 
     print("Кандидаты на приз :")
     print(prize_candidates)
