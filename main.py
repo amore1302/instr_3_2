@@ -64,9 +64,9 @@ def main():
         for current_user in mentions_users:
             current_user_id_str = str(bot.get_user_id_from_username(current_user))
             if current_user_id_str in fritnds:
-				found_good_friend = True
+			    found_good_friend = True
                 break
-		if found_good_friend:
+        if found_good_friend:
             comment_author_id_str = str(comment_full["user_id"])
             if comment_author_id_str in liked_users and comment_author_id_str in followers_users:
                 prize_candidates.add(comment_author)
