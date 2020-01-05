@@ -60,11 +60,11 @@ def main():
 
         mentions_users = get_mentions(comment)
         fritnds = bot.get_user_following(comment_author)
-		found_good_friend = False
+        found_good_friend = False
         for current_user in mentions_users:
             current_user_id_str = str(bot.get_user_id_from_username(current_user))
             if current_user_id_str in fritnds:
-			    found_good_friend = True
+                found_good_friend = True
                 break
         if found_good_friend:
             comment_author_id_str = str(comment_full["user_id"])
